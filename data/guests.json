@@ -1,13 +1,13 @@
 {
   "tops": [
-    { "key": "suit_jacket",   "display": "Suit Jacket",    "tags": ["formal_top"] },
+    { "key": "suit_jacket",   "display": "Suit Jacket",    "tags": ["formal_top", "cultural_top"] },
     { "key": "hoodie",        "display": "Hoodie",          "tags": ["casual_top"] },
     { "key": "band_tee",      "display": "Band Tee",        "tags": ["edgy_top"] },
     { "key": "kebaya",        "display": "Kebaya",          "tags": ["cultural_top", "formal_top"] },
-    { "key": "turtleneck",    "display": "Turtleneck",      "tags": ["casual_top", "formal_top"] },
+    { "key": "turtleneck",    "display": "Turtleneck",      "tags": ["casual_top", "formal_top", "cultural_top"] },
     { "key": "crop_top",      "display": "Crop Top",        "tags": ["casual_top", "edgy_top"] },
-    { "key": "flannel",       "display": "Flannel",         "tags": ["casual_top", "edgy_top"] },
-    { "key": "blazer",        "display": "Blazer",          "tags": ["formal_top", "casual_top"] },
+    { "key": "flannel",       "display": "Flannel",         "tags": ["casual_top", "edgy_top", "cultural_top"] },
+    { "key": "blazer",        "display": "Blazer",          "tags": ["formal_top", "casual_top", "cultural_top"] },
     { "key": "tank_top",      "display": "Tank Top",        "tags": ["casual_top", "edgy_top"] }
   ],
   "bottoms": [

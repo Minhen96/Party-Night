@@ -10,6 +10,9 @@ signal difficulty_changed(new_difficulty: float)
 enum DeputyState { IDLE, INTERFERE_DOOR, WANDER, FIGHT_ASSIST }
 enum GamePhase { DOOR, BATTLE, SCORE }
 
+# ── Constants ────────────────────────────────────────────────────────────────
+const GAME_DURATION: float = 180.0   # 3 real minutes = 9 PM → 12 AM
+
 # ── Run State ─────────────────────────────────────────────────────────────────
 var vibe: float = 100.0
 var run_time: float = 0.0
@@ -49,6 +52,8 @@ func _process(delta: float) -> void:
 	if current_phase == GamePhase.DOOR:
 		run_time += delta
 		_update_difficulty()
+		if run_time >= GAME_DURATION:
+			end_run()
 
 # ── Data Loading ──────────────────────────────────────────────────────────────
 

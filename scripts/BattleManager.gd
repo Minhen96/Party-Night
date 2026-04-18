@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-signal battle_ended(player_won: bool)
+signal battle_ended(player_won: bool, enemy_data: Dictionary)
 
 @onready var player_hp_bar:   ProgressBar      = $PlayerHP
 @onready var enemy_hp_bar:    ProgressBar      = $EnemyHP
@@ -9,8 +9,17 @@ signal battle_ended(player_won: bool)
 @onready var enemy_name_label:Label            = $EnemyName
 @onready var skill_bar:       HBoxContainer    = $SkillBar
 @onready var battle_log:      Label            = $BattleLog
-@onready var steal_prompt:    VBoxContainer    = $StealPrompt
+@onready var steal_prompt:    Panel            = $StealPrompt
 @onready var deputy_sprite:   AnimatedSprite2D = $DeputyInterrupt
+@onready var player_sprite:   Sprite2D         = $PlayerSprite
+@onready var enemy_head:      Sprite2D         = $EnemyContainer/Head
+@onready var enemy_top:       Sprite2D         = $EnemyContainer/Top
+@onready var enemy_bottom:    Sprite2D         = $EnemyContainer/Bottom
+@onready var enemy_lleg:      Sprite2D         = $EnemyContainer/LLeg
+@onready var enemy_rleg:      Sprite2D         = $EnemyContainer/RLeg
+@onready var enemy_shoes:     Sprite2D         = $EnemyContainer/Shoes
+@onready var enemy_acc:       Sprite2D         = $EnemyContainer/Accessory
+@onready var enemy_portrait:  Sprite2D         = $EnemyContainer/EnemySprite
 
 const PLAYER_MAX_HP = 100
 
@@ -53,7 +62,51 @@ func start_battle(enemy: Dictionary) -> void:
 	enemy_name_label.text = enemy.get("name", "Guest")
 	_refresh_skill_bar()
 	_update_hp()
+	_setup_sprites()
 	_log("Battle start! %s vs you!" % enemy.get("name", "Guest"))
+
+func _setup_sprites() -> void:
+	# Player
+	player_sprite.texture = load("res://assets/sprites/player/player_battle.png")
+	
+	# Clear previous enemy sprites
+	enemy_head.texture    = null
+	enemy_top.texture     = null
+	enemy_bottom.texture  = null
+	enemy_lleg.texture    = null
+	enemy_rleg.texture    = null
+	enemy_shoes.texture   = null
+	enemy_acc.texture     = null
+	enemy_portrait.texture = null
+	enemy_portrait.visible = false
+
+	if _enemy.get("is_famous"):
+		var key = _enemy.get("key", "")
+		var path = "res://assets/sprites/famous_guests/%s.png" % key
+		if ResourceLoader.exists(path):
+			enemy_portrait.texture = load(path)
+			enemy_portrait.visible = true
+	else:
+		# Regular guest — populate layers
+		_load_sprite(enemy_head,   "heads",       "default_head")
+		_load_sprite(enemy_top,    "tops",        _enemy.get("top", {}).get("key", ""))
+		_load_sprite(enemy_shoes,  "shoes",       _enemy.get("shoes", {}).get("key", ""))
+		_load_sprite(enemy_acc,    "accessories", _enemy.get("accessory", {}).get("key", ""))
+		
+		var b_key = _enemy.get("bottom", {}).get("key", "")
+		_load_sprite(enemy_bottom, "bottoms", b_key)
+		_load_sprite(enemy_lleg,   "bottoms", b_key + "_lleg")
+		_load_sprite(enemy_rleg,   "bottoms", b_key + "_rleg")
+
+func _load_sprite(sprite_node: Sprite2D, folder: String, key: String) -> void:
+	if key == "" or key == "none":
+		sprite_node.texture = null
+		return
+	var path = "res://assets/sprites/guests/%s/%s.png" % [folder, key]
+	if ResourceLoader.exists(path):
+		sprite_node.texture = load(path)
+	else:
+		sprite_node.texture = null
 
 func _input(event: InputEvent) -> void:
 	if not _battle_active or not _player_turn:
@@ -182,12 +235,25 @@ func _check_deputy_interrupt() -> void:
 	if roll < 0.40:
 		_enemy_hp -= 15
 		_log("Deputy trips enemy! Bonus 15 damage.")
+		_animate_deputy_pass()
 	elif roll < 0.75:
 		_log("Deputy runs across the room... does nothing.")
+		_animate_deputy_pass()
 	else:
 		_player_hp -= 10
 		GameManager.stat_deputy_betrayals += 1
 		_log("Deputy tackles you by mistake! 10 damage.")
+		_animate_deputy_pass()
+
+func _animate_deputy_pass() -> void:
+	deputy_sprite.position.x = -100
+	deputy_sprite.visible = true
+	deputy_sprite.play("walk")
+	var tween = create_tween()
+	tween.tween_property(deputy_sprite, "position:x", 1380, 1.5)
+	await tween.finished
+	deputy_sprite.visible = false
+	deputy_sprite.stop()
 
 # ── Enemy turn ────────────────────────────────────────────────────────────────
 
@@ -273,22 +339,28 @@ func _end_battle(player_won: bool) -> void:
 	if not _battle_active:
 		return
 	_battle_active = false
-	GameManager.player_hp = maxi(_player_hp, 0)
+
+	if player_won:
+		# Keep remaining HP — skill, not luck
+		GameManager.player_hp = maxi(_player_hp, 1)
+	else:
+		# Full restore on loss: bad guy forced in, you pay with dignity not HP
+		GameManager.player_hp = 100
 
 	if player_won:
 		_log("You win!")
 		await get_tree().create_timer(0.8).timeout
-		if _battle_active == false:
+		if not _battle_active:
 			_show_steal_prompt()
 	else:
-		_log("You're knocked down! Deputy holds the door for 5 seconds.")
-		await get_tree().create_timer(5.0).timeout
+		_log("You're knocked down! The guest forces their way in.")
+		await get_tree().create_timer(2.5).timeout
 		_finish(false)
 
 func _finish(player_won: bool) -> void:
 	visible = false
 	GameManager.set_phase(GameManager.GamePhase.DOOR)
-	emit_signal("battle_ended", player_won)
+	emit_signal("battle_ended", player_won, _enemy)
 
 # ── Skill steal ───────────────────────────────────────────────────────────────
 

@@ -1,9 +1,72 @@
-[gd_scene load_steps=6 format=3 uid="uid://maingame1"]
+[gd_scene load_steps=10 format=3 uid="uid://maingame1"]
 
 [ext_resource type="Script" path="res://scripts/main_game.gd" id="1_mg"]
 [ext_resource type="Script" path="res://scripts/GuestSpawner.gd" id="2_gs"]
 [ext_resource type="Script" path="res://scripts/DeputyAI.gd" id="3_da"]
 [ext_resource type="PackedScene" path="res://scenes/battle_screen.tscn" id="4_bs"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/venue_bg.jpg" id="5_venuebg"]
+[ext_resource type="Texture2D" path="res://assets/sprites/deputy/idle_0.png" id="6_deputy_i0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/deputy/walk_0.png" id="7_deputy_w0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/deputy/walk_1.png" id="8_deputy_w1"]
+
+[sub_resource type="SpriteFrames" id="s_deputy_frames"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_deputy_i0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_deputy_w0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_deputy_w1")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="s_panel"]
+bg_color = Color(0.10, 0.06, 0.18, 0.88)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.55, 0.18, 0.85, 0.55)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+content_margin_left = 10.0
+content_margin_top = 6.0
+content_margin_right = 10.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="s_vibe_fill"]
+bg_color = Color(0.18, 0.85, 0.38, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="s_vibe_bg"]
+bg_color = Color(0.06, 0.04, 0.12, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="s_spotlight"]
+bg_color = Color(0.92, 0.80, 0.20, 0.07)
+corner_radius_top_left = 80
+corner_radius_top_right = 80
+corner_radius_bottom_right = 80
+corner_radius_bottom_left = 80
 
 [node name="MainGame" type="Node2D"]
 script = ExtResource("1_mg")
@@ -11,44 +74,94 @@ script = ExtResource("1_mg")
 [node name="VenueLayer" type="CanvasLayer" parent="."]
 layer = 1
 
-[node name="VenueBG" type="ColorRect" parent="VenueLayer"]
+[node name="VenueBG" type="TextureRect" parent="VenueLayer"]
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 1280.0
 offset_bottom = 504.0
-color = Color(0.06, 0.04, 0.12, 1)
+texture = ExtResource("5_venuebg")
+expand_mode = 1
+
+[node name="VenueMidGrad" type="ColorRect" parent="VenueLayer"]
+offset_left = 0.0
+offset_top = 260.0
+offset_right = 1280.0
+offset_bottom = 504.0
+color = Color(0.07, 0.05, 0.13, 0.55)
+
+[node name="LightsContainer" type="Node2D" parent="VenueLayer"]
+
+[node name="StageLine" type="ColorRect" parent="VenueLayer"]
+offset_left = 0.0
+offset_top = 498.0
+offset_right = 1280.0
+offset_bottom = 502.0
+color = Color(0.55, 0.18, 0.85, 0.55)
+
+[node name="StageGlow" type="ColorRect" parent="VenueLayer"]
+offset_left = 0.0
+offset_top = 494.0
+offset_right = 1280.0
+offset_bottom = 500.0
+color = Color(0.55, 0.18, 0.85, 0.18)
 
 [node name="CrowdContainer" type="Node2D" parent="VenueLayer"]
 
-[node name="ActiveBadGuys" type="Node2D" parent="VenueLayer"]
+[node name="VibePanel" type="Panel" parent="VenueLayer"]
+offset_left = 904.0
+offset_top = 12.0
+offset_right = 1268.0
+offset_bottom = 76.0
+theme_override_styles/panel = SubResource("s_panel")
 
-[node name="VibeMeter" type="ProgressBar" parent="VenueLayer"]
-offset_left = 920.0
-offset_top = 18.0
-offset_right = 1260.0
-offset_bottom = 46.0
+[node name="VibeMeter" type="ProgressBar" parent="VenueLayer/VibePanel"]
+offset_left = 10.0
+offset_top = 8.0
+offset_right = 354.0
+offset_bottom = 32.0
 max_value = 100.0
 value = 100.0
 show_percentage = false
+theme_override_styles/fill = SubResource("s_vibe_fill")
+theme_override_styles/background = SubResource("s_vibe_bg")
 
-[node name="VibeLabel" type="Label" parent="VenueLayer"]
-offset_left = 920.0
-offset_top = 48.0
-offset_right = 1260.0
-offset_bottom = 70.0
+[node name="VibeLabel" type="Label" parent="VenueLayer/VibePanel"]
+offset_left = 10.0
+offset_top = 34.0
+offset_right = 354.0
+offset_bottom = 56.0
 horizontal_alignment = 1
-text = "VIBE: 100%"
+text = "VIBE  100%"
 theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.75, 0.95, 0.75, 1)
+
+[node name="ThemePersistPanel" type="Panel" parent="VenueLayer"]
+offset_left = 430.0
+offset_top = 12.0
+offset_right = 850.0
+offset_bottom = 46.0
+theme_override_styles/panel = SubResource("s_panel")
+
+[node name="ThemeName" type="Label" parent="VenueLayer/ThemePersistPanel"]
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 410.0
+offset_bottom = 28.0
+horizontal_alignment = 1
+text = ""
+theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.80, 0.65, 1.0, 0.85)
 
 [node name="ThemeReveal" type="Label" parent="VenueLayer"]
-offset_left = 200.0
-offset_top = 180.0
-offset_right = 1080.0
-offset_bottom = 260.0
+offset_left = 140.0
+offset_top = 160.0
+offset_right = 1140.0
+offset_bottom = 270.0
 horizontal_alignment = 1
 vertical_alignment = 1
 text = ""
-theme_override_font_sizes/font_size = 42
+theme_override_font_sizes/font_size = 56
+theme_override_colors/font_color = Color(1.0, 0.92, 0.3, 1)
 visible = false
 
 [node name="EntranceLayer" type="CanvasLayer" parent="."]
@@ -59,70 +172,84 @@ offset_left = 0.0
 offset_top = 504.0
 offset_right = 1280.0
 offset_bottom = 720.0
-color = Color(0.10, 0.08, 0.16, 1)
+color = Color(0.07, 0.05, 0.12, 1)
 
-[node name="DividerLine" type="ColorRect" parent="EntranceLayer"]
-offset_left = 0.0
-offset_top = 502.0
-offset_right = 1280.0
-offset_bottom = 506.0
-color = Color(0.5, 0.4, 0.7, 0.6)
+[node name="SpotlightGlow" type="Panel" parent="EntranceLayer"]
+offset_left = 560.0
+offset_top = 548.0
+offset_right = 720.0
+offset_bottom = 680.0
+theme_override_styles/panel = SubResource("s_spotlight")
+mouse_filter = 2
 
 [node name="GuestQueue" type="Node2D" parent="EntranceLayer"]
 position = Vector2(0.0, 504.0)
 script = ExtResource("2_gs")
 
 [node name="QueueSlot0" type="Node2D" parent="EntranceLayer/GuestQueue"]
-position = Vector2(110.0, 108.0)
+position = Vector2(105.0, 108.0)
 
 [node name="QueueSlot1" type="Node2D" parent="EntranceLayer/GuestQueue"]
-position = Vector2(230.0, 108.0)
+position = Vector2(225.0, 108.0)
 
 [node name="QueueSlot2" type="Node2D" parent="EntranceLayer/GuestQueue"]
-position = Vector2(350.0, 108.0)
+position = Vector2(345.0, 108.0)
 
 [node name="CurrentGuestSpot" type="Node2D" parent="EntranceLayer"]
-position = Vector2(640.0, 612.0)
+position = Vector2(640.0, 610.0)
 
 [node name="Deputy" type="AnimatedSprite2D" parent="EntranceLayer"]
-position = Vector2(950.0, 615.0)
+position = Vector2(960.0, 614.0)
+sprite_frames = SubResource("s_deputy_frames")
+animation = &"idle"
 script = ExtResource("3_da")
 
 [node name="AdviceBubble" type="Label" parent="EntranceLayer"]
-offset_left = 870.0
-offset_top = 540.0
-offset_right = 1060.0
-offset_bottom = 575.0
+offset_left = 875.0
+offset_top = 538.0
+offset_right = 1075.0
+offset_bottom = 570.0
 horizontal_alignment = 1
 text = ""
 visible = false
 theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(1.0, 0.9, 0.3, 1)
 
 [node name="RejectHint" type="Label" parent="EntranceLayer"]
-offset_left = 30.0
-offset_top = 685.0
-offset_right = 250.0
-offset_bottom = 715.0
-text = "← REJECT  (A)"
+offset_left = 18.0
+offset_top = 686.0
+offset_right = 240.0
+offset_bottom = 714.0
+text = "◄  REJECT    [A]"
 theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.95, 0.35, 0.35, 0.9)
 
 [node name="LetInHint" type="Label" parent="EntranceLayer"]
-offset_left = 1030.0
-offset_top = 685.0
-offset_right = 1250.0
-offset_bottom = 715.0
+offset_left = 1040.0
+offset_top = 686.0
+offset_right = 1262.0
+offset_bottom = 714.0
 horizontal_alignment = 2
-text = "LET IN →  (D)"
+text = "[D]    LET IN  ►"
 theme_override_font_sizes/font_size = 14
+theme_override_colors/font_color = Color(0.35, 0.95, 0.45, 0.9)
 
-[node name="ThemeIcon" type="Label" parent="EntranceLayer"]
-offset_left = 440.0
-offset_top = 685.0
-offset_right = 840.0
-offset_bottom = 715.0
+[node name="ThemeHintPanel" type="Panel" parent="EntranceLayer"]
+offset_left = 430.0
+offset_top = 686.0
+offset_right = 850.0
+offset_bottom = 716.0
+theme_override_styles/panel = SubResource("s_panel")
+
+[node name="ThemeHint" type="Label" parent="EntranceLayer/ThemeHintPanel"]
+offset_left = 8.0
+offset_top = 3.0
+offset_right = 412.0
+offset_bottom = 24.0
 horizontal_alignment = 1
 text = ""
 theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.80, 0.70, 1.0, 0.85)
 
 [node name="TintLayer" type="CanvasLayer" parent="."]
 layer = 3
@@ -138,13 +265,22 @@ mouse_filter = 2
 [node name="UILayer" type="CanvasLayer" parent="."]
 layer = 4
 
-[node name="Timer" type="Label" parent="UILayer"]
-offset_left = 20.0
-offset_top = 18.0
-offset_right = 160.0
+[node name="TimerPanel" type="Panel" parent="UILayer"]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 195.0
 offset_bottom = 46.0
-text = "00:00"
-theme_override_font_sizes/font_size = 20
+theme_override_styles/panel = SubResource("s_panel")
+
+[node name="Timer" type="Label" parent="UILayer/TimerPanel"]
+offset_left = 10.0
+offset_top = 4.0
+offset_right = 175.0
+offset_bottom = 28.0
+horizontal_alignment = 1
+text = "9:00 PM"
+theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(0.75, 0.65, 1.0, 1)
 
 [node name="BattleScreen" parent="." instance=ExtResource("4_bs")]
 visible = false
