@@ -1,0 +1,47 @@
+{
+  "black_tie": {
+    "name": "Black Tie Gala",
+    "description": "Formal wear only tonight",
+    "hint": "Suit up or stay out.",
+    "required": ["formal_top", "formal_bottom", "formal_shoes"],
+    "required_any": [],
+    "forbidden": ["sloppy_shoes", "edgy_top", "edgy_bottom"],
+    "tint_color": "#1a2a5a55"
+  },
+  "rave": {
+    "name": "Underground Rave",
+    "description": "Wristband holders only",
+    "hint": "No wristband, no entry.",
+    "required": ["wristband"],
+    "required_any": [],
+    "forbidden": [],
+    "tint_color": "#4a1a6a66"
+  },
+  "nineties": {
+    "name": "90s Night",
+    "description": "Retro vibes — no suits allowed",
+    "hint": "Keep it casual and retro.",
+    "required": ["casual_top"],
+    "required_any": [],
+    "forbidden": ["formal_top", "formal_bottom", "formal_shoes"],
+    "tint_color": "#6a3a1a55"
+  },
+  "industry": {
+    "name": "Industry Mixer",
+    "description": "Lanyard or VIP badge required",
+    "hint": "You need credentials.",
+    "required": [],
+    "required_any": ["lanyard", "vip"],
+    "forbidden": [],
+    "tint_color": "#1a4a4a55"
+  },
+  "culture": {
+    "name": "Local Culture Night",
+    "description": "Celebrate local fashion",
+    "hint": "Show some local pride.",
+    "required": [],
+    "required_any": ["cultural_top"],
+    "forbidden": [],
+    "tint_color": "#5a4a1a55"
+  }
+}

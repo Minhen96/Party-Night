@@ -1,0 +1,44 @@
+{
+  "tops": [
+    { "key": "suit_jacket",   "display": "Suit Jacket",    "tags": ["formal_top"] },
+    { "key": "hoodie",        "display": "Hoodie",          "tags": ["casual_top"] },
+    { "key": "band_tee",      "display": "Band Tee",        "tags": ["edgy_top"] },
+    { "key": "kebaya",        "display": "Kebaya",          "tags": ["cultural_top", "formal_top"] },
+    { "key": "turtleneck",    "display": "Turtleneck",      "tags": ["casual_top", "formal_top"] },
+    { "key": "crop_top",      "display": "Crop Top",        "tags": ["casual_top", "edgy_top"] },
+    { "key": "flannel",       "display": "Flannel",         "tags": ["casual_top", "edgy_top"] },
+    { "key": "blazer",        "display": "Blazer",          "tags": ["formal_top", "casual_top"] },
+    { "key": "tank_top",      "display": "Tank Top",        "tags": ["casual_top", "edgy_top"] }
+  ],
+  "bottoms": [
+    { "key": "slacks",        "display": "Slacks",          "tags": ["formal_bottom"] },
+    { "key": "ripped_jeans",  "display": "Ripped Jeans",   "tags": ["edgy_bottom"] },
+    { "key": "shorts",        "display": "Shorts",          "tags": ["casual_bottom"] },
+    { "key": "skirt",         "display": "Skirt",           "tags": ["casual_bottom"] },
+    { "key": "chinos",        "display": "Chinos",          "tags": ["casual_bottom", "formal_bottom"] },
+    { "key": "leather_pants", "display": "Leather Pants",  "tags": ["edgy_bottom"] },
+    { "key": "jeans",         "display": "Jeans",           "tags": ["casual_bottom"] },
+    { "key": "mini_skirt",    "display": "Mini Skirt",      "tags": ["casual_bottom", "edgy_bottom"] }
+  ],
+  "shoes": [
+    { "key": "oxford",        "display": "Oxfords",         "tags": ["formal_shoes"] },
+    { "key": "sneakers",      "display": "Sneakers",        "tags": ["casual_shoes"] },
+    { "key": "flip_flops",    "display": "Flip Flops",      "tags": ["casual_shoes", "sloppy_shoes"] },
+    { "key": "boots",         "display": "Boots",           "tags": ["edgy_shoes", "casual_shoes"] },
+    { "key": "heels",         "display": "Heels",           "tags": ["formal_shoes"] },
+    { "key": "loafers",       "display": "Loafers",         "tags": ["formal_shoes", "casual_shoes"] },
+    { "key": "platform",      "display": "Platform Shoes",  "tags": ["edgy_shoes"] },
+    { "key": "dress_shoes",   "display": "Dress Shoes",     "tags": ["formal_shoes"] }
+  ],
+  "accessories": [
+    { "key": "none",          "display": "",                "tags": [] },
+    { "key": "sunglasses",    "display": "Sunglasses",      "tags": ["cool"] },
+    { "key": "cap",           "display": "Cap",             "tags": ["casual_acc"] },
+    { "key": "wristband",     "display": "Wristband",       "tags": ["wristband"] },
+    { "key": "lanyard",       "display": "Lanyard",         "tags": ["lanyard"] },
+    { "key": "vip_badge",     "display": "VIP Badge",       "tags": ["vip"] },
+    { "key": "backpack",      "display": "Backpack",        "tags": ["suspicious"] },
+    { "key": "scarf",         "display": "Scarf",           "tags": ["casual_acc", "formal_acc"] },
+    { "key": "chain",         "display": "Chain",           "tags": ["cool", "edgy_acc"] }
+  ]
+}

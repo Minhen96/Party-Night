@@ -1,0 +1,91 @@
+{
+  "tackle": {
+    "name": "Tackle",
+    "description": "Reliable 20 damage. Always connects.",
+    "damage": 20,
+    "heal": 0,
+    "effect": "none",
+    "is_base": true
+  },
+  "intimidate": {
+    "name": "Intimidate",
+    "description": "Enemy skips their next attack.",
+    "damage": 0,
+    "heal": 0,
+    "effect": "skip_enemy_turn",
+    "is_base": true
+  },
+  "call_deputy": {
+    "name": "Call Deputy",
+    "description": "Deputy attacks — 30 dmg OR hits you for 15.",
+    "damage": 0,
+    "heal": 0,
+    "effect": "call_deputy",
+    "is_base": true
+  },
+  "stall": {
+    "name": "Stall",
+    "description": "Recover 15 HP. Enemy gets a free hit.",
+    "damage": 0,
+    "heal": 15,
+    "effect": "stall",
+    "is_base": true
+  },
+  "critique": {
+    "name": "Critique",
+    "description": "Reduces enemy attack by 50% for 2 turns.",
+    "damage": 0,
+    "heal": 0,
+    "effect": "debuff_enemy_damage",
+    "effect_duration": 2,
+    "is_base": false
+  },
+  "optimise": {
+    "name": "Optimise",
+    "description": "Copies enemy's last move damage against them.",
+    "damage": 0,
+    "heal": 0,
+    "effect": "copy_enemy_move",
+    "is_base": false
+  },
+  "go_viral": {
+    "name": "Go Viral",
+    "description": "Deals 25 damage and stuns enemy for 1 turn.",
+    "damage": 25,
+    "heal": 0,
+    "effect": "go_viral",
+    "is_base": false
+  },
+  "bribe": {
+    "name": "Bribe",
+    "description": "50% end battle, 50% backfires for 40 dmg.",
+    "damage": 0,
+    "heal": 0,
+    "effect": "bribe",
+    "is_base": false
+  },
+  "scene": {
+    "name": "Scene",
+    "description": "Deal 20 dmg. Deputy redirected this turn.",
+    "damage": 20,
+    "heal": 0,
+    "effect": "scene",
+    "is_base": false
+  },
+  "detox": {
+    "name": "Detox",
+    "description": "Heal 25 HP and cleanse enemy damage debuff.",
+    "damage": 0,
+    "heal": 25,
+    "effect": "detox",
+    "is_base": false
+  },
+  "disrupt": {
+    "name": "Disrupt",
+    "description": "Deal 15 dmg and shuffle enemy's next move.",
+    "damage": 15,
+    "heal": 0,
+    "effect": "disrupt",
+    "is_base": false
+  }
+}

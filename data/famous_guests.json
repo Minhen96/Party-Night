@@ -1,0 +1,90 @@
+{
+  "gordon_flame": {
+    "name": "Gordon Flamé",
+    "base_hp": 80,
+    "moves": ["rage", "throw_pan"],
+    "signature_skill": "critique",
+    "moods": {
+      "good":    { "tell": "Smiling, toque on straight",    "vibe_on_enter": 15, "triggers_fight": false },
+      "neutral": { "tell": "Straight face, arms crossed",   "vibe_on_enter": 0,  "triggers_fight": false },
+      "bad":     { "tell": "Frowning, toque askew",         "vibe_on_enter": 0,  "triggers_fight": true  }
+    }
+  },
+  "elon_tusk": {
+    "name": "Elon Tusk",
+    "base_hp": 90,
+    "moves": ["disrupt", "pivot"],
+    "signature_skill": "optimise",
+    "moods": {
+      "good":    { "tell": "Confident stride, clean suit",  "vibe_on_enter": 10, "triggers_fight": false },
+      "neutral": { "tell": "Distracted, looking at phone",  "vibe_on_enter": 0,  "triggers_fight": false },
+      "bad":     { "tell": "Carrying whiteboard",           "vibe_on_enter": 0,  "triggers_fight": true  }
+    }
+  },
+  "bella_scrolls": {
+    "name": "Bella Scrolls",
+    "base_hp": 70,
+    "moves": ["selfie_stun", "cancel"],
+    "signature_skill": "go_viral",
+    "moods": {
+      "good":    { "tell": "Phone away, smiling",           "vibe_on_enter": 20, "triggers_fight": false },
+      "neutral": { "tell": "Glancing around casually",      "vibe_on_enter": 0,  "triggers_fight": false },
+      "bad":     { "tell": "Ring light on, phone pointed",  "vibe_on_enter": 0,  "triggers_fight": true  }
+    }
+  },
+  "senator_spinwell": {
+    "name": "Senator Spinwell",
+    "base_hp": 75,
+    "moves": ["handshake", "spin"],
+    "signature_skill": "bribe",
+    "moods": {
+      "good":    { "tell": "Waving, relaxed smile",         "vibe_on_enter": 5,  "triggers_fight": false },
+      "neutral": { "tell": "Hand outstretched, neutral",    "vibe_on_enter": 0,  "triggers_fight": false },
+      "bad":     { "tell": "Sweating, eyes darting",        "vibe_on_enter": 0,  "triggers_fight": true  }
+    }
+  },
+  "rex_rager": {
+    "name": "Rex Rager",
+    "base_hp": 110,
+    "moves": ["stage_dive", "crowd_surf"],
+    "signature_skill": "scene",
+    "moods": {
+      "good":    { "tell": "Fist bump at door, calm",       "vibe_on_enter": 25, "triggers_fight": false },
+      "neutral": { "tell": "Quiet, hood up",                "vibe_on_enter": 0,  "triggers_fight": false },
+      "bad":     { "tell": "Leather jacket ripped, wild",   "vibe_on_enter": 0,  "triggers_fight": true  }
+    }
+  },
+  "dr_wellness": {
+    "name": "Dr. Wellness",
+    "base_hp": 65,
+    "moves": ["cleanse", "lecture"],
+    "signature_skill": "detox",
+    "moods": {
+      "good":    { "tell": "Hands clasped, calm smile",     "vibe_on_enter": 8,  "triggers_fight": false },
+      "neutral": { "tell": "Reading pamphlet quietly",      "vibe_on_enter": 0,  "triggers_fight": false },
+      "bad":     { "tell": "Preaching at the queue",        "vibe_on_enter": 0,  "triggers_fight": true  }
+    }
+  },
+  "the_founder": {
+    "name": "The Founder",
+    "base_hp": 70,
+    "moves": ["pitch", "pivot"],
+    "signature_skill": "disrupt",
+    "moods": {
+      "good":    { "tell": "Nodding, hands in pockets",     "vibe_on_enter": 5,  "triggers_fight": false },
+      "neutral": { "tell": "Checking watch, impatient",     "vibe_on_enter": 0,  "triggers_fight": false },
+      "bad":     { "tell": "Carrying pitch deck, frantic",  "vibe_on_enter": 0,  "triggers_fight": true  }
+    }
+  },
+  "madam_drama": {
+    "name": "Madam Drama",
+    "base_hp": 85,
+    "moves": ["meltdown", "entourage"],
+    "signature_skill": "scene",
+    "moods": {
+      "good":    { "tell": "Grand entrance, wide smile",    "vibe_on_enter": 10, "triggers_fight": false },
+      "neutral": { "tell": "Sunglasses on, blank face",     "vibe_on_enter": 0,  "triggers_fight": false },
+      "bad":     { "tell": "Entourage visible behind her",  "vibe_on_enter": 0,  "triggers_fight": true  }
+    }
+  }
+}

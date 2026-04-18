@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://guest0001"]
+
+[ext_resource type="Script" path="res://scripts/guest.gd" id="1_guest"]
+
+[node name="Guest" type="Node2D"]
+script = ExtResource("1_guest")
+
+[node name="Top" type="ColorRect" parent="."]
+offset_left = -22.0
+offset_top = -50.0
+offset_right = 22.0
+offset_bottom = -12.0
+color = Color(0.3, 0.3, 0.3, 1)
+
+[node name="Bottom" type="ColorRect" parent="."]
+offset_left = -18.0
+offset_top = -12.0
+offset_right = 18.0
+offset_bottom = 20.0
+color = Color(0.25, 0.25, 0.35, 1)
+
+[node name="Shoes" type="ColorRect" parent="."]
+offset_left = -18.0
+offset_top = 20.0
+offset_right = 18.0
+offset_bottom = 36.0
+color = Color(0.15, 0.12, 0.1, 1)
+
+[node name="Accessory" type="ColorRect" parent="."]
+offset_left = -8.0
+offset_top = -62.0
+offset_right = 8.0
+offset_bottom = -50.0
+color = Color(0.9, 0.7, 0.1, 1)
+
+[node name="NameLabel" type="Label" parent="."]
+offset_left = -70.0
+offset_top = 38.0
+offset_right = 70.0
+offset_bottom = 56.0
+horizontal_alignment = 1
+text = ""
+label_settings = null
+
+[node name="TellLabel" type="Label" parent="."]
+offset_left = -90.0
+offset_top = 58.0
+offset_right = 90.0
+offset_bottom = 80.0
+horizontal_alignment = 1
+autowrap_mode = 3
+text = ""
+visible = false

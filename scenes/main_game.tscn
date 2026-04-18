@@ -1,0 +1,150 @@
+[gd_scene load_steps=6 format=3 uid="uid://maingame1"]
+
+[ext_resource type="Script" path="res://scripts/main_game.gd" id="1_mg"]
+[ext_resource type="Script" path="res://scripts/GuestSpawner.gd" id="2_gs"]
+[ext_resource type="Script" path="res://scripts/DeputyAI.gd" id="3_da"]
+[ext_resource type="PackedScene" path="res://scenes/battle_screen.tscn" id="4_bs"]
+
+[node name="MainGame" type="Node2D"]
+script = ExtResource("1_mg")
+
+[node name="VenueLayer" type="CanvasLayer" parent="."]
+layer = 1
+
+[node name="VenueBG" type="ColorRect" parent="VenueLayer"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1280.0
+offset_bottom = 504.0
+color = Color(0.06, 0.04, 0.12, 1)
+
+[node name="CrowdContainer" type="Node2D" parent="VenueLayer"]
+
+[node name="ActiveBadGuys" type="Node2D" parent="VenueLayer"]
+
+[node name="VibeMeter" type="ProgressBar" parent="VenueLayer"]
+offset_left = 920.0
+offset_top = 18.0
+offset_right = 1260.0
+offset_bottom = 46.0
+max_value = 100.0
+value = 100.0
+show_percentage = false
+
+[node name="VibeLabel" type="Label" parent="VenueLayer"]
+offset_left = 920.0
+offset_top = 48.0
+offset_right = 1260.0
+offset_bottom = 70.0
+horizontal_alignment = 1
+text = "VIBE: 100%"
+theme_override_font_sizes/font_size = 14
+
+[node name="ThemeReveal" type="Label" parent="VenueLayer"]
+offset_left = 200.0
+offset_top = 180.0
+offset_right = 1080.0
+offset_bottom = 260.0
+horizontal_alignment = 1
+vertical_alignment = 1
+text = ""
+theme_override_font_sizes/font_size = 42
+visible = false
+
+[node name="EntranceLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="EntranceBG" type="ColorRect" parent="EntranceLayer"]
+offset_left = 0.0
+offset_top = 504.0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.10, 0.08, 0.16, 1)
+
+[node name="DividerLine" type="ColorRect" parent="EntranceLayer"]
+offset_left = 0.0
+offset_top = 502.0
+offset_right = 1280.0
+offset_bottom = 506.0
+color = Color(0.5, 0.4, 0.7, 0.6)
+
+[node name="GuestQueue" type="Node2D" parent="EntranceLayer"]
+position = Vector2(0.0, 504.0)
+script = ExtResource("2_gs")
+
+[node name="QueueSlot0" type="Node2D" parent="EntranceLayer/GuestQueue"]
+position = Vector2(110.0, 108.0)
+
+[node name="QueueSlot1" type="Node2D" parent="EntranceLayer/GuestQueue"]
+position = Vector2(230.0, 108.0)
+
+[node name="QueueSlot2" type="Node2D" parent="EntranceLayer/GuestQueue"]
+position = Vector2(350.0, 108.0)
+
+[node name="CurrentGuestSpot" type="Node2D" parent="EntranceLayer"]
+position = Vector2(640.0, 612.0)
+
+[node name="Deputy" type="AnimatedSprite2D" parent="EntranceLayer"]
+position = Vector2(950.0, 615.0)
+script = ExtResource("3_da")
+
+[node name="AdviceBubble" type="Label" parent="EntranceLayer"]
+offset_left = 870.0
+offset_top = 540.0
+offset_right = 1060.0
+offset_bottom = 575.0
+horizontal_alignment = 1
+text = ""
+visible = false
+theme_override_font_sizes/font_size = 13
+
+[node name="RejectHint" type="Label" parent="EntranceLayer"]
+offset_left = 30.0
+offset_top = 685.0
+offset_right = 250.0
+offset_bottom = 715.0
+text = "← REJECT  (A)"
+theme_override_font_sizes/font_size = 14
+
+[node name="LetInHint" type="Label" parent="EntranceLayer"]
+offset_left = 1030.0
+offset_top = 685.0
+offset_right = 1250.0
+offset_bottom = 715.0
+horizontal_alignment = 2
+text = "LET IN →  (D)"
+theme_override_font_sizes/font_size = 14
+
+[node name="ThemeIcon" type="Label" parent="EntranceLayer"]
+offset_left = 440.0
+offset_top = 685.0
+offset_right = 840.0
+offset_bottom = 715.0
+horizontal_alignment = 1
+text = ""
+theme_override_font_sizes/font_size = 13
+
+[node name="TintLayer" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="ThemeTint" type="ColorRect" parent="TintLayer"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.0, 0.0, 0.0, 0.0)
+mouse_filter = 2
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="Timer" type="Label" parent="UILayer"]
+offset_left = 20.0
+offset_top = 18.0
+offset_right = 160.0
+offset_bottom = 46.0
+text = "00:00"
+theme_override_font_sizes/font_size = 20
+
+[node name="BattleScreen" parent="." instance=ExtResource("4_bs")]
+visible = false
